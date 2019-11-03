@@ -41,12 +41,12 @@ let classes = [
         ["汽新1813", "汽新1814"]
     ],
     [
-        ["网络1901","网络1902","网络1903","网络1917"],
-        ["电商1904","电商1918","电商1919"],
-        ["软件1905","软件1906","软件1907","软件1908","软件1909"],
-        ["工设1910","工设1911","工设1912"],
-        ["广告1913","广告1914"],
-        ["室内1915","室内1916"]
+        ["网络1901", "网络1902", "网络1903", "网络1917"],
+        ["电商1904", "电商1918", "电商1919"],
+        ["软件1905", "软件1906", "软件1907", "软件1908", "软件1909"],
+        ["工设1910", "工设1911", "工设1912"],
+        ["广告1913", "广告1914"],
+        ["室内1915", "室内1916"]
     ],
     [
         ["商英1801", "商英1802", "商英1803", "商英1804"],
@@ -69,14 +69,35 @@ let classes = [
         ["营销1807", "营销1808"],
         ["报关1809", "报关1810"],
         ["连锁1811"]
-    ],[
+    ], [
         ['社工1801']
     ]
 ]
-function createOption (wmy,data) {
+
+function createOption(obj, data) {
     for (var i in data) {
-        var wang = new Option(data[i],i);
-        wmy.Option.add(wang);
+        var op = new Option(data[i], i);
+        obj.options.add(op);
     }
 }
-var province = document.getElementById
+
+var collegeSelect = document.getElementById('collegeSelect');
+createOption(collegeSelect, colleges);
+
+var majorSelect = document.getElementById('majorSelect');
+collegeSelect.onchange = function () {
+    majorSelect.options.length = 0
+    createOption(majorSelect, majors[collegeSelect.value]);
+    if (collegeSelect.value >= 0) {
+        majorSelect.onchange();
+    } else {
+        classSelect.options.length = 0;
+    }
+}
+
+
+var classSelect = document.getElementById('classSelect');
+majorSelect.onchange = function () {
+    classSelect.options.length = 0;
+    createOption(classSelect, classes[collegeSelect.value][majorSelect.value]);
+}
