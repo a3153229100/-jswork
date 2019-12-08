@@ -1,8 +1,8 @@
 var hours = new Date().getHours();
 var minutes = new Date().getMinutes();
-var f = 60-minutes;
+var f = 59-minutes;
 var second = new Date().getSeconds();
-var m = 60-second;
+var m = 59-second;
 
 let endseconds =new Date().getTime()+f*1000*60+m*1000;
 let d = h = m = s =0;
